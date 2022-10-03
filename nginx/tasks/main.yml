@@ -1,0 +1,16 @@
+---
+# tasks file for nginx
+- name: update yum
+  command: sudo yum update -y
+- name: enable epel
+  command: amazon-linux-extras enable epel
+- name: download epel
+  command: yum install epel-release -y
+- name: installing nginx
+  command: yum install nginx -y
+- name: copy index.html
+  template: src=index.html dest=/usr/share/nginx/html/index.html     
+- name: starting nginx
+  command: systemctl start nginx
+  notify:
+    - restart nginx 
